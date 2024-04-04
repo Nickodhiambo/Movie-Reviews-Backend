@@ -17,4 +17,4 @@ app.use('*', (req, res) => {
     res.status(404).json({'error': 'Not found'})
 });
 
-export default app; // Export our code to be used in a file that accesses the databaseimport
+export default app; // Export our code to be used in a file that accesses the database import
