@@ -39,7 +39,7 @@ export default class ReviewsController{
     }
 
     // Updates a review
-    static async apiUpdateReview(){
+    static async apiUpdateReview(req, res, next){
         try{
             const reviewId = req.params.id
             const review = req.body
@@ -81,7 +81,7 @@ export default class ReviewsController{
     static async apiGetReviews(req, res, next){
         try{
             let id = req.params.id || {}
-            let reviews = await ReviewsDAO.getReviewsbyMovieId(id)
+            let reviews = await ReviewsDAO.getReviewsByMovieId(id)
             if (!reviews){
                 res.status(404).json({error: 'Not found'})
                 return

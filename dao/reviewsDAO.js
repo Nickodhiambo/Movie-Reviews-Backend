@@ -40,7 +40,7 @@ export default class ReviewsDAO{
     // Get a single review by its ID
     static async getReview(reviewId){
         try{
-            return await reviews.findOne({_id: ObjectId(reviewId)});
+            return await reviews.findOne({_id: new ObjectId(reviewId)});
         } catch (e){
             console.error(`Unable to get review: ${e}`);
             return {error: e}
@@ -51,7 +51,7 @@ export default class ReviewsDAO{
     static async updateReview(reviewId, review, user){
         try{
             const updateResponse = await reviews.updateOne(
-                {_id: ObjectId(reviewId)},
+                {_id: new ObjectId(reviewId)},
                 {$set: {review: review, user: user}}
             )
             return updateResponse;
@@ -64,7 +64,7 @@ export default class ReviewsDAO{
     // Delete a review
     static async deleteReview(reviewId){
         try{
-            const deleteResponse = await reviews.deleteOne({_id: ObjectId(reviewId)});
+            const deleteResponse = await reviews.deleteOne({_id: new ObjectId(reviewId)});
             return deleteResponse;
         } catch (e){
             console.error(`Unable to delete review: ${e}`);
@@ -75,7 +75,7 @@ export default class ReviewsDAO{
     // Get all reviews to a movie
     static async getReviewsByMovieId(movieId){
         try{
-            const cursor = await reviews.findOne({movieId: parseInt(movieId)});
+            const cursor = await reviews.find({movieId: parseInt(movieId)});
             return cursor.toArray();
         } catch (e){
             console.error(`Unable to get reviews: ${e}`);
